@@ -5,8 +5,15 @@ const port = process.env.PORT || 3000
 const users = require("./routes/api/users")
 const profile = require("./routes/api/profile")
 const posts = require("./routes/api/posts");
+const bodyParser = require("body-parser")
 
 const db = require("./config/keys").mongoURI;
+
+
+
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
+
 
 
 mongoose.connect(db)
