@@ -3,12 +3,52 @@ const router = express.Router()
 var User = require("../../models/User")
 var gravatar = require("gravatar")
 var bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+const keys = require("../../config/keys");
 
 
-//@route    GET api/users/test
-//@desc     test route
+
+
+//@route    POST api/users/login
+//@desc     login route
 //@access   PUBLIC
-router.get("/test",(req,res) => {res.json({msg:"it works"})})
+router.post("/login",(req,res) => {
+
+ const email = req.body.email;
+ const password = req.body.password
+
+  User.findOne({email:email})
+  .then(user => {
+  	if(!user){
+  		return res.status(404).json({email:"Email not found"})
+  	}else{
+
+  		bcrypt.compare(password,user.password)
+  		.then(isMatch => {
+  			if (isMatch) {
+
+              const payload = {id:user.id,name : user.name,avatar:user.avatar}
+
+              jwt.sign(payload,
+              	keys.jwtSecret,
+              	{expiresIn : 3600},
+              	(err,token) => {
+                  res.json({
+                  	success:true,
+                  	token: 'Bearer' + token
+                  })
+              	})
+
+              
+  			} else {
+              return res.status(400).json({password : "incorrect password"})
+  			}
+  		})
+  			}
+  		})
+  	})
+  
+
 
 
 
@@ -21,7 +61,7 @@ router.post("/register",(req,res) => {
   	if(user){
   		return res.status(400).json({email:"Email already registered"})
   	}else{
-  		
+
         const avatar = gravatar.url(req.body.email,{s : "200",r : "pg",d : "mm"})
 
 
