@@ -8,6 +8,8 @@ const keys = require("../../config/keys");
 const passport = require("passport")
 
 
+const validateRegisterInput = require("../../validation/register")
+const validateLoginInput = require("../../validation/login")
 
 
 //@route    POST api/users/login
@@ -15,13 +17,20 @@ const passport = require("passport")
 //@access   PUBLIC
 router.post("/login",(req,res) => {
 
+	const {errors,isValid} = validateLoginInput(req.body) 
+
+	if(!isValid){
+		return res.status(400).json(errors)
+	}
+
  const email = req.body.email;
  const password = req.body.password
 
   User.findOne({email:email})
   .then(user => {
   	if(!user){
-  		return res.status(404).json({email:"Email not found"})
+  		errors.email = "user not found"
+  		return res.status(404).json(errors)
   	}else{
 
   		bcrypt.compare(password,user.password)
@@ -42,7 +51,8 @@ router.post("/login",(req,res) => {
 
               
   			} else {
-              return res.status(400).json({password : "incorrect password"})
+  				errors.password = "Incorrect password"
+              return res.status(400).json(errors)
   			}
   		})
   			}
@@ -53,14 +63,26 @@ router.post("/login",(req,res) => {
 
 
 
+  
+
+
 //@route    POST api/users/register
 //@desc     register route
 //@access   PUBLIC
 router.post("/register",(req,res) => {
+
+	const {errors,isValid} = validateRegisterInput(req.body) 
+
+	if(!isValid){
+		return res.status(400).json(errors)
+	}
+
+
   User.findOne({email:req.body.email})
   .then(user => {
   	if(user){
-  		return res.status(400).json({email:"Email already registered"})
+  		errors.email = "Oops! Email already registered"
+  		return res.status(400).json(errors)
   	}else{
 
         const avatar = gravatar.url(req.body.email,{s : "200",r : "pg",d : "mm"})
