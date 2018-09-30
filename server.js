@@ -7,6 +7,8 @@ const profile = require("./routes/api/profile")
 const posts = require("./routes/api/posts");
 const bodyParser = require("body-parser")
 const passport = require("passport")
+var cors = require('cors')
+app.use(cors())
 
 const db = require("./config/keys").mongoURI;
 
