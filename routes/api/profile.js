@@ -8,6 +8,12 @@ const validateProfileInput = require("../../validation/profile")
 
 
 
+// @route   GET api/profile/test
+// @desc    Tests route
+// @access  Public
+router.get('/test', (req, res) => res.json({ msg: 'API connected' }));
+
+
 
 // @route   GET api/profile/all
 // @desc    Get all profiles

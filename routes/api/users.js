@@ -12,6 +12,13 @@ const validateRegisterInput = require("../../validation/register")
 const validateLoginInput = require("../../validation/login")
 
 
+
+// @route   GET api/user/test
+// @desc    Tests route
+// @access  Public
+router.get('/test', (req, res) => res.json({ msg: 'API connected' }));
+
+
 //@route    POST api/users/login
 //@desc     login route
 //@access   PUBLIC
