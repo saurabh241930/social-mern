@@ -28,6 +28,9 @@ router.get('/all', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 });
 
+
+
+
 // @route   GET api/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
@@ -138,14 +141,14 @@ router.post('/',passport.authenticate('jwt', { session: false }),(req, res) => {
       } else {
         // Create
 
-        // Check if handle exists
+      
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
           }
 
-          // Save Profile
+          
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
