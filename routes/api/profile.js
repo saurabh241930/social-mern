@@ -105,6 +105,10 @@ router.get('/',passport.authenticate('jwt', { session: false }),
 );
 
 
+
+// @route   POST api/profile
+// @desc    Get current users profile
+// @access  Private
 router.post('/',passport.authenticate('jwt', { session: false }),(req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
 
