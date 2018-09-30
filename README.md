@@ -15,4 +15,15 @@ USER API's
 |--------	  |-------------------	|-----------------	|---------------	|-------------	|
 | POST    	| api/users/login    	| success & token 	| PUBLIC        	| Login route  	|
 | POST    	| api/users/register 	| "API connected" 	| PUBLIC        	| Rgister route |
-| GET    	  | /api/posts/test   	| "API connected" 	| PUBLIC        	| Test route  	|
+
+
+
+PROFILE API's
+
+| METHOD 	  | ROUTE             	| EXPECT          	| ACCESSIBILITY 	| DESCRIPTION 	|
+|--------	  |-------------------	|-----------------	|---------------	|-------------	|
+| POST    	| api/users/login    	| success & token 	| PUBLIC        	| Login route  	|
+| POST    	| api/users/register 	| "API connected" 	| PUBLIC        	| Rgister route |
+| POST    	| api/users/login    	| success & token 	| PUBLIC        	| Login route  	|
+| POST    	| api/users/register 	| "API connected" 	| PUBLIC        	| Rgister route |
+
