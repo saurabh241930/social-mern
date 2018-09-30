@@ -23,7 +23,9 @@ PROFILE API's
 | METHOD 	  | ROUTE             	        | EXPECT          	| ACCESSIBILITY 	| DESCRIPTION 	|
 |--------	  |-------------------	        |-----------------	|---------------	|-------------	|
 | GET    	  | api/profile/all  	          | all profile     	| PUBLIC        	| all profile  	|
-| GET    	| api/profile/handle/:handle 	| profile         	  | PUBLIC        	| handle  *e.g.* `/handle/saurabh` |
-| GET    	| api/profile/user/:user_id	  | profile         	  | PUBLIC        	| user profile  *e.g.* `/user/5j3jwhb7rsgf87u` |
+| GET    	  | api/profile/handle/:handle 	| profile         	| PUBLIC        	| handle  *e.g.* `/handle/saurabh` |
+| GET    	  | api/profile/user/:user_id	  | profile         	| PUBLIC        	| user profile  *e.g.* `/user/5j3jwhb7rsgf87u` |
+| GET    	  | api/profile                 | profile         	| PRIVATE       	| user profile  |
+
 
 
