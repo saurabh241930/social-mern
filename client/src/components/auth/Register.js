@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios'
-import classnames from 'classnames'
+import classnames from 'classnames';
+import {connect} from 'react-redux';
+import { registerUser } from '../../actions/authActions'
 
 
 class Register extends React.Component {
@@ -35,11 +37,16 @@ class Register extends React.Component {
         password2:this.state.password2
     }
 
-    axios.post("/api/users/register",newUser)
-    .then(function (response){console.log(response.data)})
-    .catch(err => this.setState({errors:err.response.data}))
-    // .catch(err => this.setState({errors:err.response.data}))
 
+     
+   this.props.registerUser(newUser)
+
+
+
+  //   axios.post("/api/users/register",newUser)
+  //   .then(function (response){console.log(response.data)})
+  //   .catch(err => this.setState({errors:err.response.data}))
+  //   // .catch(err => this.setState({errors:err.response.data}))
    
   }
 
@@ -128,4 +135,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default connect(null,{registerUser})(Register);
